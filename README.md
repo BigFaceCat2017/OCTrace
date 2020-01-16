@@ -11,3 +11,4 @@ Objective-C Trace Tools for iOS and macOS
 ### 参考
 1. [ObjC method observer](https://codeshare.frida.re/@mrmacete/objc-method-observer/)
 2. [frida-scripts](https://github.com/0xdea/frida-scripts)
+3. [FridaDev](https://github.com/houugen/FridaDev)
