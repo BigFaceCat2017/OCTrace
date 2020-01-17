@@ -1,5 +1,5 @@
 
-console.log("ios_trace.js starting\n");
+console.log("octrace.js starting\n");
 var ISA_MASK = ptr('0x0000000ffffffff8');
 var ISA_MAGIC_MASK = ptr('0x000003f000000001');
 var ISA_MAGIC_VALUE = ptr('0x000001a000000001');
@@ -88,7 +88,7 @@ function traceObjC(impl, name)
 	Interceptor.attach(impl, {
 
 		onEnter: function(args) {
-			console.log("\n*** entered : \n" + name);
+			console.log("\nentered : \n" + name);
 
 			// print full backtrace
 			// console.log("\nBacktrace:\n" + Thread.backtrace(this.context, Backtracer.ACCURATE)

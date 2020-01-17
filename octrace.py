@@ -7,13 +7,7 @@
 # ============================
 
 import frida
-import threading
-import time
 import sys
-import argparse
-import codecs
-import subprocess
-import os
 
 
 
@@ -22,13 +16,17 @@ global session
 def on_message(message, data):
     print("[{}] => {}".format(message, data))
 
-def main(target_process):
-    frida.get_remote_device()
-    session = frida.attach(target_process)
-    jscript = "octrace.js"
-    with open(jscript) as f:
-        script = session.create_script(f.read())
-
+def trace(target_process, is_usb=False):
+    if is_usb:
+        device = frida.get_usb_device()
+        session = device.attach(target_process)
+    else:
+        session = frida.attach(target_process)
+    # session1 = frida.spawn(target_process)
+    name = "octrace.js"
+    with open(name) as f:
+        content = f.read()
+        script = session.create_script(content)
     script.on("message", on_message)
     script.load()
     print("[!] Ctrl+D or Ctrl+Z to detach from instrumented program.\n\n")
@@ -45,7 +43,5 @@ def main(target_process):
     finally:
         pass
 
-
-
 if __name__ == "__main__":
-    main("微信")
+    trace("微信")
